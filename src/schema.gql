@@ -1,0 +1,78 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Tweet {
+  id: Int!
+  content: String!
+  userTweetId: Int!
+  user: User!
+}
+
+type Record {
+  id: Int!
+  followedId: Int!
+  followerId: Int!
+  user: User!
+}
+
+type User {
+  id: Int!
+  username: String!
+  email: String!
+  password: String!
+  tweets: [Tweet!]
+  records: [Record!]!
+}
+
+type Query {
+  getTweets(pagination: Pagination!): [Tweet!]!
+  getTweetsCount(userId: Int!): Int!
+  getTweet(id: Int!): Tweet!
+  logged: User!
+  getUsers(pagination: Pagination!): [User!]!
+  getUser(id: Int!): User!
+  getRecords(pagination: Pagination!): [Record!]!
+  getFollowers(getFollowers: GetFollowers!): [User!]!
+  getFollowings(getFollowers: GetFollowers!): [User!]!
+  getFollowersCount(userId: Int!): Int!
+}
+
+input Pagination {
+  page: Int!
+  perPage: Int!
+}
+
+input GetFollowers {
+  id: Int!
+  page: Int!
+  perPage: Int!
+}
+
+type Mutation {
+  createTweet(createTweetInput: CreateTweetInput!): Tweet!
+  createUser(createUserInupt: CreateUserInput!): User!
+  login(loginUserInput: LoginUserInput!): String!
+  createRecord(createRecordInput: CreateRecordInput!): Record!
+}
+
+input CreateTweetInput {
+  content: String!
+  userTweetId: Int!
+}
+
+input CreateUserInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input CreateRecordInput {
+  followerId: Int!
+  followedId: Int!
+}
